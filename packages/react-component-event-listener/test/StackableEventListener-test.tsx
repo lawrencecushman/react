@@ -1,6 +1,7 @@
 import { documentRef, StackableEventListener } from '@stardust-ui/react-component-event-listener'
 import { mount } from 'enzyme'
 import * as React from 'react'
+// @ts-ignore
 import * as simulant from 'simulant'
 
 describe('EventListener', () => {

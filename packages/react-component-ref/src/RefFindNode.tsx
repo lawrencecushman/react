@@ -4,19 +4,9 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
 import handleRef from './handleRef'
+import { RefProps } from './types'
 
-export interface RefFindNodeProps {
-  children: React.ReactElement<any>
-
-  /**
-   * Called when a child component will be mounted or updated.
-   *
-   * @param {HTMLElement} node - Referred node.
-   */
-  innerRef: React.Ref<any>
-}
-
-export default class RefFindNode extends React.Component<RefFindNodeProps> {
+export default class RefFindNode extends React.Component<RefProps> {
   static displayName = 'RefFindNode'
 
   static propTypes = {

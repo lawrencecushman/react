@@ -5,7 +5,7 @@ import leven from './leven'
 
 type ObjectOf<T> = Record<string, T>
 
-const typeOf = x => Object.prototype.toString.call(x)
+const typeOf = (x: any) => Object.prototype.toString.call(x)
 
 /**
  * Ensure a component can render as a give prop value.
@@ -70,15 +70,18 @@ export const suggest = (suggestions: string[]) => {
   // the words in each key are sorted alphabetically so that we have a consistent
   // way of looking up a value in the map, i.e. we can sort the words in the
   // incoming propValue and look that up without having to check all permutations.
-  const suggestionsLookup = suggestions.reduce((acc, key) => {
-    acc[
-      key
-        .split(' ')
-        .sort()
-        .join(' ')
-    ] = true
-    return acc
-  }, {})
+  const suggestionsLookup: Record<string, boolean> = suggestions.reduce(
+    (acc: Record<string, boolean>, key: string) => {
+      acc[
+        key
+          .split(' ')
+          .sort()
+          .join(' ')
+      ] = true
+      return acc
+    },
+    {},
+  )
 
   return (props: ObjectOf<any>, propName: string, componentName: string) => {
     const propValue = props[propName]
@@ -236,7 +239,7 @@ export const some = (validators: Function[]) => (
  * @param {object} propsShape An object describing the prop shape.
  * @param {function} validator A propType function.
  */
-export const givenProps = (propsShape: object, validator: Function) => (
+export const givenProps = (propsShape: Record<string, any>, validator: Function) => (
   props: ObjectOf<any>,
   propName: string,
   componentName: string,
@@ -260,7 +263,7 @@ export const givenProps = (propsShape: object, validator: Function) => (
     )
   }
 
-  const shouldValidate = _.keys(propsShape).every(key => {
+  const shouldValidate = _.keys(propsShape).every((key: string) => {
     const val = propsShape[key]
     // require propShape validators to pass or prop values to match
     return typeof val === 'function'

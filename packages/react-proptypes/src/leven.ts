@@ -2,13 +2,14 @@
 // https://github.com/sindresorhus/leven/blob/master/index.js
 /* eslint-disable */
 
-let leven = (a, b) => 0
+// @ts-ignore
+let leven = (a: string, b: string): number | undefined => 0
 
 if (process.env.NODE_ENV !== 'production') {
   const arr: number[] = []
   const charCodeCache: number[] = []
 
-  leven = (a, b) => {
+  leven = (a: string, b: string): number | undefined => {
     if (a === b) return 0
 
     const aLen = a.length
