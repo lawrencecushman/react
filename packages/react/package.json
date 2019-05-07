@@ -5,6 +5,7 @@
   "author": "Levi Thomason <me@levithomason.com>",
   "bugs": "https://github.com/stardust-ui/react/issues",
   "dependencies": {
+    "@emmetio/expand-abbreviation": "^0.7.3",
     "@stardust-ui/react-component-event-listener": "^0.29.0",
     "@stardust-ui/react-component-nesting-registry": "^0.29.0",
     "@stardust-ui/react-proptypes": "^0.29.0",

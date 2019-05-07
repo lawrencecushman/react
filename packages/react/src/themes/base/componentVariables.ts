@@ -1,3 +1,5 @@
+export { default as AppLayout } from './components/AppLayout/appLayoutVariables'
+
 export { default as Dialog } from './components/Dialog/dialogVariables'
 
 export { default as Flex } from './components/Flex/flexVariables'

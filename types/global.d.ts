@@ -19,4 +19,6 @@ declare interface Window {
   prettierPlugins: any
   resetExternalLayout?: () => void
   switchTheme?: (themeName: string) => void
+  Flipping?: any
+  flipping?: any
 }

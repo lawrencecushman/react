@@ -5,6 +5,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as ReactFela from 'react-fela'
 import * as Classnames from 'classnames'
+import * as EmmetExpandAbbreviation from '@emmetio/expand-abbreviation'
 
 export const babelConfig = {
   plugins: [
@@ -24,6 +25,7 @@ export const imports = {
   react: React,
   'react-dom': ReactDOM,
   'react-fela': ReactFela,
+  '@emmetio/expand-abbreviation': EmmetExpandAbbreviation,
 }
 
 export const importResolver = importName => imports[importName]
