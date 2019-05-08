@@ -1,7 +1,7 @@
 import * as CSSType from 'csstype'
 import { IRenderer as FelaRenderer } from 'fela'
 import * as React from 'react'
-import { Extendable, ObjectOf, ObjectOrFunc } from '../types'
+import { Extendable, Nullable, ObjectOf, ObjectOrFunc } from '../types'
 
 // Themes go through 3 phases.
 // 1. Input - (from the user), variable and style objects/functions, some values optional
@@ -208,6 +208,10 @@ export type ComponentSlotStyle<TProps = {}, TVars = {}> =
 
 export interface ComponentSlotStylesInput<TProps = {}, TVars = {}>
   extends ObjectOf<ComponentSlotStyle<TProps, TVars>> {}
+
+export type ComponentSelectorsAndStyles<TProps = {}, TVars = {}> = (
+  vars: TVars,
+) => { [key in keyof TProps]: [Nullable<Partial<TProps>>, ICSSInJSStyle][] }
 
 export interface ComponentSlotStylesPrepared<TProps = {}, TVars = {}>
   extends ObjectOf<ComponentSlotStyleFunction<TProps, TVars>> {}
