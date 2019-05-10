@@ -424,7 +424,7 @@ class Dropdown extends AutoControlledComponent<Extendable<DropdownProps>, Dropdo
                     : Icon.create(toggleIndicator, {
                         defaultProps: {
                           className: Dropdown.slotClassNames.toggleIndicator,
-                          name: open ? 'stardust-arrow-up' : 'stardust-arrow-down',
+                          name: this.getToggleIndicatorIconName(),
                           styles: styles.toggleIndicator,
                         },
                         overrideProps: (predefinedProps: IconProps) => ({
@@ -1208,6 +1208,15 @@ class Dropdown extends AutoControlledComponent<Extendable<DropdownProps>, Dropdo
     this.a11yStatusTimeout = setTimeout(() => {
       this.setState({ a11ySelectionStatus: '' })
     }, Dropdown.a11yStatusCleanupTime)
+  }
+
+  private getToggleIndicatorIconName = (): string => {
+    const { position, open } = this.props
+    const positionedAbove = position === 'above'
+
+    return (open && !positionedAbove) || (!open && positionedAbove)
+      ? 'stardust-arrow-up'
+      : 'stardust-arrow-down'
   }
 }
 
