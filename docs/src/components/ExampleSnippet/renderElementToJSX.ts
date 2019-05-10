@@ -1,5 +1,6 @@
 import * as React from 'react'
 import reactElementToJSXString from 'react-element-to-jsx-string'
+import { prettifyCode } from '@stardust-ui/docs-components'
 
 const renderElementToJSX = (element: React.ReactNode, triggerErrorOnRenderFn: boolean = false) => {
   let renderHasFunction
@@ -34,7 +35,7 @@ const renderElementToJSX = (element: React.ReactNode, triggerErrorOnRenderFn: bo
     }
   }
 
-  return jsxMarkup
+  return prettifyCode(jsxMarkup, 'babylon')
 }
 
 export default renderElementToJSX

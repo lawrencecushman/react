@@ -2,6 +2,8 @@ import { useBooleanKnob, useSelectKnob, useStringKnob } from '@stardust-ui/docs-
 import { Button } from '@stardust-ui/react'
 import * as React from 'react'
 
+import componentInfoContext from '../../../utils/componentInfoContext'
+
 const ButtonPlayground: React.FunctionComponent = () => {
   const [content] = useStringKnob({
     name: 'content',
@@ -13,25 +15,37 @@ const ButtonPlayground: React.FunctionComponent = () => {
     initialValue: 'camera',
     values: ['book', 'camera'],
   })
-  const [iconPosition] = useSelectKnob({
-    name: 'iconPosition',
-    initialValue: 'before',
-    values: ['before', 'after'],
+
+  const knobProps = {}
+  componentInfoContext.byDisplayName.Button.props.forEach(({ name, defaultValue, type }) => {
+    //
+    // Boolean
+    //
+    if (type === 'boolean') {
+      const [knobValue] = useBooleanKnob({ name, initialValue: defaultValue })
+      if (knobValue !== undefined) knobProps[name] = knobValue
+    }
+
+    //
+    // Select
+    //
+    if (type.includes(' | ')) {
+      const values = type.replace(/"/g, '').split(' | ')
+      const [knobValue] = useSelectKnob({ name, initialValue: values[0], values })
+
+      if (knobValue !== undefined) knobProps[name] = knobValue
+    }
+
+    //
+    // String & Shorthand
+    //
+    if (type === 'string' || type.includes('ShorthandValue')) {
+      const [knobValue] = useStringKnob({ name, initialValue: defaultValue })
+      if (knobValue !== undefined) knobProps[name] = knobValue
+    }
   })
 
-  const [primary] = useBooleanKnob({ name: 'primary' })
-  const [text] = useBooleanKnob({ name: 'text' })
-
-  return (
-    <Button
-      content={content}
-      icon={icon}
-      /* TODO: better typings */
-      iconPosition={iconPosition as any}
-      primary={primary}
-      text={text}
-    />
-  )
+  return <Button {...knobProps} content={content} icon={icon} />
 }
 
 export default ButtonPlayground
